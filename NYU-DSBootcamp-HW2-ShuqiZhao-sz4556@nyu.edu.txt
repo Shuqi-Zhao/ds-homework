@@ -5,3 +5,25 @@ SELECT COUNT(*) AS TotalOrders
 	AND DATE(order_completed_date) = '2023-03-18';
 
 #2
+SELECT COUNT(*) AS TotalOrders
+	FROM orders
+	JOIN customers ON orders.customer_id = customers.customer_id
+	WHERE customers.first_name = 'John'
+	AND customers.last_name = 'Doe'
+	AND DATE(orders.order_completed_date) = '2023-03-18'
+	AND orders.order_status = 'Completed';
+
+#3
+SELECT COUNT(DISTINCT customer_id) AS TotalCustomers, AVG(total_amount) AS AverageSpend
+	FROM orders
+	WHERE order_status = 'Completed'
+	AND order_date >= '2023-01-01'
+	AND order_date < '2023-02-01';
+
+#4
+SELECT department_id, SUM(revenue) AS TotalRevenue
+	FROM sales
+	WHERE YEAR(sale_date) = 2022
+	GROUP BY department_id
+	HAVING SUM(revenue) < 600;
+
