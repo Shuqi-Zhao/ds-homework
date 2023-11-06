@@ -27,3 +27,16 @@ SELECT department_id, SUM(revenue) AS TotalRevenue
 	GROUP BY department_id
 	HAVING SUM(revenue) < 600;
 
+#5
+SELECT order_id, MIN(Revenue) AS least_revenue, MAX(Revenue) AS most_revenue
+	FROM sales
+	GROUP BY order_id
+
+
+#6
+SELECT A.Order_id, B.item_name
+	FROM sales as A
+	JOIN items as B
+	ON A.item_id = B.item_id
+	WHERE A.Revenue = (SELECT MAX(Revenue) FROM sales);
+
